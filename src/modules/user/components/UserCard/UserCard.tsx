@@ -1,5 +1,6 @@
 import React from 'react';
 
+import styles from './userCard.module.scss';
 import { User } from '../../models/userModels';
 
 interface UserCardProps {
@@ -7,10 +8,10 @@ interface UserCardProps {
 }
 
 export const UserCard: React.FC<UserCardProps> = ({ user }) => (
-    <article>
-        <h1>{user.login}</h1>
-        <figure>
-            <img src={user.avatarUrl} alt={`@${user.login}`} />
-        </figure>
+    <article className={styles.card}>
+        <header className={styles.cardHeader}>
+            <h1 className={styles.login}>{user.login}</h1>
+            <img className={styles.loginAvatar} src={user.avatarUrl} alt={user.login} />
+        </header>
     </article>
 );
