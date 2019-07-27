@@ -1,0 +1,20 @@
+@import './variables';
+
+@mixin box-shadow($color) {
+    box-shadow: 0 0 8px 0 $color;
+}
+
+@mixin basic-shadow {
+    @include box-shadow($shadow);
+}
+
+@mixin quick-transition {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+@mixin basic-transition($property) {
+    transition-property: $property;
+
+    @include quick-transition;
+}
