@@ -16,7 +16,7 @@ export const App: React.FC = () => (
             <main className={styles.appView}>
                 <Switch>
                     <Route path={AppRoute.Users} exact component={Users} />
-                    <Route path={`${AppRoute.Users}/:id`} component={User} />
+                    <Route path={`${AppRoute.Users}/:login`} component={User} />
                     <Redirect to={AppRoute.Users} />
                 </Switch>
             </main>

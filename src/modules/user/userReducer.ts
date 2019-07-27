@@ -48,6 +48,25 @@ export const userReducer: Reducer<UserState, AppAction> = (state = userInitialSt
                 isFetchingUsers: false,
             };
 
+        case actions.GET_USER_DETAILS_REQUESTED:
+            return {
+                ...state,
+                isFetchingUserDetails: true,
+            };
+
+        case actions.GET_USER_DETAILS_SUCCEEDED:
+            return {
+                ...state,
+                usersDetails: [...state.usersDetails, action.payload!],
+                isFetchingUserDetails: false,
+            };
+
+        case actions.GET_USER_DETAILS_FAILED:
+            return {
+                ...state,
+                isFetchingUserDetails: false,
+            };
+
         default:
             return state;
     }

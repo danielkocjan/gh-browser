@@ -1,5 +1,5 @@
 import { Action } from 'common/store/appAction';
-import { UserData } from './models/userModels';
+import { UserData, UserDetailsData } from './models/userModels';
 
 export const GET_USERS_REQUESTED = '[USER] GET_USERS_REQUESTED';
 export type GetUsersRequest = Action<typeof GET_USERS_REQUESTED>;
@@ -21,4 +21,30 @@ export const getUsersFailure = (error: string): GetUsersFailure => ({
     payload: error,
 });
 
-export type UserAction = GetUsersRequest | GetUsersSuccess | GetUsersFailure;
+export const GET_USER_DETAILS_REQUESTED = '[USER] GET_USER_DETAILS_REQUESTED';
+export type GetUserDetailsRequest = Action<typeof GET_USER_DETAILS_REQUESTED>;
+export const getUserDetailsRequest = (): GetUserDetailsRequest => ({
+    type: GET_USER_DETAILS_REQUESTED,
+});
+
+export const GET_USER_DETAILS_SUCCEEDED = '[USER] GET_USER_DETAILS_SUCCEEDED';
+export type GetUserDetailsSuccess = Action<typeof GET_USER_DETAILS_SUCCEEDED, UserDetailsData>;
+export const getUserDetailsSuccess = (userDetails: UserDetailsData): GetUserDetailsSuccess => ({
+    type: GET_USER_DETAILS_SUCCEEDED,
+    payload: userDetails,
+});
+
+export const GET_USER_DETAILS_FAILED = '[USER] GET_USER_DETAILS_FAILED';
+export type GetUserDetailsFailure = Action<typeof GET_USER_DETAILS_FAILED, string>;
+export const getUserDetailsFailure = (error: string): GetUserDetailsFailure => ({
+    type: GET_USER_DETAILS_FAILED,
+    payload: error,
+});
+
+export type UserAction =
+    | GetUsersRequest
+    | GetUsersSuccess
+    | GetUsersFailure
+    | GetUserDetailsRequest
+    | GetUserDetailsSuccess
+    | GetUserDetailsFailure;

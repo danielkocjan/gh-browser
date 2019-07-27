@@ -10,31 +10,32 @@ import { UserCard } from '../../components/UserCard/UserCard';
 
 import { UserData } from 'modules/user/models/userModels';
 import { getUsers } from 'modules/user/userEffects';
+import { getUsers as getUsersSelector, getUsersFetchingStatus } from 'modules/user/userSelectors';
 
 interface StateProps {
     users: UserData[];
-    isFetchingUsers: boolean;
+    isFetching: boolean;
 }
 
 interface DispatchProps {
     getUsers: any;
 }
 
-class UsersContainer extends Component<StateProps & DispatchProps, any> {
+class UsersContainer extends Component<StateProps & DispatchProps> {
     componentDidMount() {
         this.props.getUsers();
     }
 
     render() {
         // todo: spinner hoc
-        return this.props.isFetchingUsers ? (
+        return this.props.isFetching ? (
             'Loading...'
         ) : (
             <section className={styles.users}>
                 {this.props.users.map(user => (
                     <Link
                         className={styles.userCardWrapper}
-                        to={`${AppRoute.Users}/${user.id}`}
+                        to={`${AppRoute.Users}/${user.login}`}
                         key={user.id}
                     >
                         <UserCard user={user} />
@@ -45,9 +46,9 @@ class UsersContainer extends Component<StateProps & DispatchProps, any> {
     }
 }
 
-const mapState = ({ user }: AppState): StateProps => ({
-    users: user.users,
-    isFetchingUsers: user.isFetchingUsers,
+const mapState = (state: AppState): StateProps => ({
+    users: getUsersSelector(state),
+    isFetching: getUsersFetchingStatus(state),
 });
 
 const mapDispatch = (dispatch: React.Dispatch<any>) => ({

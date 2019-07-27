@@ -1,4 +1,4 @@
-import React, { useContext, ReducerState, Reducer } from 'react';
+import React, { useContext, ReducerState, Reducer, useReducer } from 'react';
 
 import { AppReducer } from './appReducer';
 import { GlobalState } from './store';
@@ -15,7 +15,7 @@ export const StateProvider: React.FC<StateProviderProps> = ({
     initialState,
     children,
 }) => {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
         <GlobalState.Provider value={{ state, dispatch: appDispatch(dispatch, state) }}>
