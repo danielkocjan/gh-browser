@@ -1,4 +1,4 @@
-import { User } from '../models/userModels';
+import { UserData } from '../models/userModels';
 import { pagination } from 'common/config/constants';
 
 export const users = [
@@ -25,7 +25,7 @@ export const users = [
     },
 ];
 
-export const usersMocks: User[] = Array(pagination.size)
+export const usersMocks: UserData[] = Array(pagination.size)
     .fill('')
     .map((_, index) => ({
         ...users[index % users.length],

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styles from './userCard.module.scss';
-import { User } from '../../models/userModels';
+import { UserData } from '../../models/userModels';
 
 interface UserCardProps {
-    user: User;
+    user: UserData;
 }
 
 export const UserCard: React.FC<UserCardProps> = ({ user }) => (

@@ -1,9 +1,9 @@
-import { UserDetails } from '../models/userModels';
+import { UserDetailsData } from '../models/userModels';
 
-export const userDetailsMock: UserDetails = {
+export const userDetailsMock: UserDetailsData = {
     login: 'danielkocjan',
     id: 21957456,
-    avatarUrl: 'https://i.pravatar.cc/400?u=21957456',
+    avatarUrl: 'https://i.pravatar.cc/400',
     url: 'https://api.github.com/users/danielkocjan',
     htmlUrl: 'https://github.com/danielkocjan',
     reposUrl: 'https://api.github.com/users/danielkocjan/repos',

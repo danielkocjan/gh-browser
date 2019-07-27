@@ -1,5 +1,5 @@
-// scss files that do not produce styles like variables/mixins
-// could be injected globally in webpack to prevent those imports
+// to prevent those imports in every scss module file,
+// scss files that do not produce styles (variables/mixins) could be injected in webpack config
 @import '../../../../common/styles/variables';
 @import '../../../../common/styles/mixins';
 
@@ -14,7 +14,7 @@
     @include basic-shadow;
     @include basic-transition(border);
 
-    &::hover {
+    &:hover {
         border: 1px solid $primary;
 
         @include basic-transition(border);
