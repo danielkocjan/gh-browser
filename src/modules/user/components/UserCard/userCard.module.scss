@@ -14,7 +14,5 @@
 
     &:hover {
         border: 1px solid $primary;
-
-        @include basic-transition(border);
     }
 }

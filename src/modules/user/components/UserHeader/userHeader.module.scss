@@ -16,11 +16,11 @@
         content: '@';
         color: $secondary-variant;
     }
+}
 
-    &Avatar {
-        width: 6rem;
-        border-radius: 50%;
+.avatar {
+    width: 6rem;
+    border-radius: 50%;
 
-        @include basic-shadow;
-    }
+    @include basic-shadow;
 }

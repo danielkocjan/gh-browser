@@ -7,9 +7,9 @@ interface UserHeaderProps {
     avatarUrl: string;
 }
 
-export const UserHeader: React.FC<UserHeaderProps> = props => (
+export const UserHeader: React.FC<UserHeaderProps> = ({ login, ...props }) => (
     <header className={styles.header}>
-        <h1 className={styles.login}>{props.login}</h1>
-        <img className={styles.loginAvatar} src={props.avatarUrl} alt={props.login} />
+        <h1 className={styles.login}>{login}</h1>
+        <img className={styles.avatar} src={props.avatarUrl} alt={login} />
     </header>
 );
