@@ -29,7 +29,7 @@ export const userInitialState: UserState = {
 
 export const userReducer: Reducer<UserState, AppAction> = (state = userInitialState, action) => {
     switch (action.type) {
-        case actions.GET_USERS:
+        case actions.GET_USERS_REQUESTED:
             return {
                 ...state,
                 isFetchingUsers: true,

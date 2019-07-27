@@ -4,7 +4,7 @@ import { userReducer, UserState, userInitialState } from 'modules/user/userReduc
 
 import { AppAction } from './appAction';
 
-interface AppState {
+export interface AppState {
     user: UserState;
 }
 

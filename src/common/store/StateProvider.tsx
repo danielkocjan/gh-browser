@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useReducer, ReducerState } from 'react';
-import { AppReducer } from './appReducer';
+import React, { useContext, ReducerState, Reducer } from 'react';
 
-export const GlobalState = createContext({});
+import { AppReducer } from './appReducer';
+import { GlobalState } from './store';
+import { AppAction } from './appAction';
+import { appDispatch } from './dispatch';
 
 interface StateProviderProps {
-    reducer: AppReducer;
+    reducer: Reducer<ReturnType<AppReducer>, AppAction>;
     initialState: ReducerState<AppReducer>;
 }
 
@@ -12,10 +14,14 @@ export const StateProvider: React.FC<StateProviderProps> = ({
     reducer,
     initialState,
     children,
-}) => (
-    <GlobalState.Provider value={useReducer(reducer, initialState)}>
-        {children}
-    </GlobalState.Provider>
-);
+}) => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+
+    return (
+        <GlobalState.Provider value={{ state, dispatch: appDispatch(dispatch, state) }}>
+            {children}
+        </GlobalState.Provider>
+    );
+};
 
 export const useGlobalState = () => useContext(GlobalState);
