@@ -1,18 +1,8 @@
 @import '../../../../common/styles/variables';
 
 .userDetails {
-    border: 1px solid red;
-
-    width: 100%;
-    padding: 1rem 0;
+    border: 1px solid $border;
+    max-width: 100%;
+    padding: 1rem;
     margin: 1rem 0;
-}
-
-.header {
-    &Login {
-        &::before {
-            content: '@';
-            color: $secondary-variant;
-        }
-    }
 }

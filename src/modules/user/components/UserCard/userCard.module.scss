@@ -6,10 +6,8 @@
 .card {
     width: 100%;
     padding: 1rem 0;
-    margin: 1rem 0;
 
     border: 1px solid $border;
-    cursor: pointer;
 
     @include basic-shadow;
     @include basic-transition(border);
@@ -18,29 +16,5 @@
         border: 1px solid $primary;
 
         @include basic-transition(border);
-    }
-
-    &Header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1rem;
-    }
-}
-
-.login {
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &::before {
-        content: '@';
-        color: $secondary-variant;
-    }
-
-    &Avatar {
-        width: 6rem;
-        border-radius: 50%;
-
-        @include basic-shadow;
     }
 }

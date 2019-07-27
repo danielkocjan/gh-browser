@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './userDetails.module.scss';
 import { UserDetailsData } from '../../models/userModels';
+import { UserHeader } from '../UserHeader/UserHeader';
 
 interface UserDetailsProps {
     user: UserDetailsData;
@@ -9,10 +10,6 @@ interface UserDetailsProps {
 
 export const UserDetails: React.FC<UserDetailsProps> = ({ user }) => (
     <article className={styles.userDetails}>
-        <header className={styles.header}>
-            <h1 className={styles.headerLogin}>{user.login}</h1>
-            {user.name && <h2>{user.name}</h2>}
-            <img className={styles.loginAvatar} src={user.avatarUrl} alt={user.login} />
-        </header>
+        <UserHeader login={user.login} avatarUrl={user.avatarUrl} />
     </article>
 );

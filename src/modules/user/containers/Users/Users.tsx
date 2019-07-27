@@ -10,7 +10,11 @@ import { UserCard } from '../../components/UserCard/UserCard';
 export const Users: React.FC = () => (
     <section className={styles.users}>
         {usersMocks.map(user => (
-            <Link to={`${AppRoute.Users}/${user.id}`} key={user.id}>
+            <Link
+                className={styles.userCardWrapper}
+                to={`${AppRoute.Users}/${user.id}`}
+                key={user.id}
+            >
                 <UserCard user={user} />
             </Link>
         ))}
