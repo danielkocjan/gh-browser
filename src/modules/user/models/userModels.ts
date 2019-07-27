@@ -1,4 +1,4 @@
-export interface User {
+export interface UserData {
     login: string;
     id: number;
     avatarUrl: string;
@@ -7,7 +7,7 @@ export interface User {
     reposUrl: string;
 }
 
-export interface UserDetails extends User {
+export interface UserDetailsData extends UserData {
     name: string;
     blog: string;
     hireable: boolean;

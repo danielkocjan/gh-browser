@@ -1,0 +1,26 @@
+@import '../../../../common/styles/variables';
+@import '../../../../common/styles/mixins';
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.login {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &::before {
+        content: '@';
+        color: $secondary-variant;
+    }
+}
+
+.avatar {
+    width: 6rem;
+    border-radius: 50%;
+
+    @include basic-shadow;
+}
