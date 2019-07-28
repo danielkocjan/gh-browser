@@ -15,9 +15,11 @@ export class UserService {
         return this.httpService.get<UserDetailsData>(`${API_URL}/users/${login}`);
     }
 
-    public searchUsers(searchTerm: string) {
+    public searchUsers(searchTerm?: string) {
+        const searchParam = searchTerm ? `&q=${searchTerm}` : '';
+
         return this.httpService.get<SearchUsersResponse>(
-            `${API_URL}/search/users?per_page=${pagination.size}&q=${searchTerm}`
+            `${API_URL}/search/users?per_page=${pagination.size}${searchParam}`
         );
     }
 }

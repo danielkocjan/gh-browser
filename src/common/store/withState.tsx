@@ -1,9 +1,7 @@
 import React, { ComponentType } from 'react';
 
 import { withDefault } from 'common/helpers/withDefault';
-import { AppState } from './appReducer';
-import { AppDispatch } from './appAction';
-import { GlobalState } from './appContext';
+import { AppState, AppDispatch, GlobalState } from './';
 
 export type MapState<StateProps, OwnProps> = (state: AppState, ownProps: OwnProps) => StateProps;
 

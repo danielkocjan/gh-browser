@@ -7,9 +7,9 @@ import { SearchUsersResponse } from './models/userRequestModels';
 import { UserAction } from './userActions';
 import * as actions from './userActions';
 
-// todo: usersEffectFactory
+// todo: refactor this to hooks
 
-export const getUsersEffect = () => (dispatch: Dispatch<UserAction>) => {
+export const getUsersDispatch = () => (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUsersRequest());
 
     return rootService.userService
@@ -18,7 +18,7 @@ export const getUsersEffect = () => (dispatch: Dispatch<UserAction>) => {
         .catch(() => dispatch(actions.getUsersFailure('Failed to get users')));
 };
 
-export const searchUsersEffect = (searchTerm: string) => (dispatch: Dispatch<UserAction>) => {
+export const searchUsersDispatch = (searchTerm: string) => (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.searchUsersRequest());
 
     return rootService.userService
@@ -27,7 +27,7 @@ export const searchUsersEffect = (searchTerm: string) => (dispatch: Dispatch<Use
         .catch(() => dispatch(actions.searchUsersFailure('Failed to search users')));
 };
 
-export const getUserDetailsEffect = (login: string) => (dispatch: Dispatch<UserAction>) => {
+export const getUserDetailsDispatch = (login: string) => (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUserDetailsRequest());
 
     return rootService.userService

@@ -1,5 +1,5 @@
 import { Action } from 'common/store';
-import { UserData, UserDetailsData } from './models/userModels';
+import { UserData, UserDetailsData } from 'modules/user/models/userModels';
 
 export const GET_USERS_REQUESTED = '[USER] GET_USERS_REQUESTED';
 export type GetUsersRequest = Action<typeof GET_USERS_REQUESTED>;

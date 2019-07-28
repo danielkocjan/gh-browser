@@ -7,20 +7,24 @@ import { AppRoute } from 'common/config/routes';
 
 interface UsersListProps {
     users: UserData[];
-    isFetching: boolean;
 }
 
 // todo: spinner hoc
-export const UsersList: React.FC<UsersListProps> = ({ isFetching, users }) => (
+export const UsersList: React.FC<UsersListProps> = ({ users }) => (
     <ul>
-        {isFetching
-            ? 'Loading...'
-            : users &&
-              users.length &&
-              users.map(user => (
-                  <Link to={`${AppRoute.Users}/${user.login}`} key={user.id}>
-                      <UserCard user={user} />
-                  </Link>
-              ))}
+        {users && users.length > 0 ? (
+            users.map(user => (
+                <Link to={`${AppRoute.Users}/${user.login}`} key={user.id}>
+                    <UserCard user={user} />
+                </Link>
+            ))
+        ) : (
+            <h1>
+                No users found{' '}
+                <span role="img" aria-label="Crying Cat Face">
+                    😿
+                </span>
+            </h1>
+        )}
     </ul>
 );
