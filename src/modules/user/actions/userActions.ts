@@ -1,4 +1,4 @@
-import { Action } from 'common/store';
+import { Action } from 'common/appAction';
 import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
 
 export const GET_USERS_REQUESTED = '[USER] GET_USERS_REQUESTED';

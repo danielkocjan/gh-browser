@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useReducer } from 'react';
 
 import { useDebounce } from 'common/hooks/useDebounce';
-import { userReducer, userInitialState } from 'modules/user/userReducer';
+import { Spinner } from 'common/components/Spinner/Spinner';
+
+import { userReducer, userInitialState } from 'modules/user/reducers/userReducer';
 import { UsersList } from 'modules/user/components/UsersList/UsersList';
-import { getUsersDispatch, searchUsersDispatch } from 'modules/user/userDispatchers';
+import { getUsersDispatch, searchUsersDispatch } from 'modules/user/dispatchers/userDispatchers';
 
 import styles from './users.module.scss';
 
@@ -34,7 +36,7 @@ export const Users: React.FC = () => {
                     </button>
                 </div>
             </header>
-            {isFetchingUsers ? 'Loading...' : <UsersList users={users} />}
+            {isFetchingUsers ? <Spinner /> : <UsersList users={users} />}
         </section>
     );
 };

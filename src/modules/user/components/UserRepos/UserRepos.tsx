@@ -1,9 +1,12 @@
 import React, { useReducer, useEffect } from 'react';
-import { userInitialState, userReducer } from 'modules/user/userReducer';
-import { getUserReposDispatch } from 'modules/user/userDispatchers';
+
+import { OutsideLink } from 'common/components/OutsideLink';
+import { Spinner } from 'common/components/Spinner/Spinner';
+
+import { userInitialState, userReducer } from 'modules/user/reducers/userReducer';
+import { getUserReposDispatch } from 'modules/user/dispatchers/userDispatchers';
 
 import styles from './userRepos.module.scss';
-import { OutsideLink } from 'common/components/OutsideLink';
 
 interface UserReposProps {
     login: string;
@@ -20,14 +23,19 @@ export const UserRepos: React.FC<UserReposProps> = ({ login }) => {
     }, [login]);
 
     return isFetchingUserRepos ? (
-        <div>Loading...</div>
+        <Spinner />
     ) : (
-        <div>
-            {userRepos.map(repo => (
-                <OutsideLink to={repo.htmlUrl} key={repo.id}>
-                    <ul>{repo.name}</ul>
-                </OutsideLink>
-            ))}
-        </div>
+        <section>
+            <h1>Popular repositories</h1>
+            {userRepos &&
+                userRepos.length > 0 &&
+                userRepos.map(repo => (
+                    <OutsideLink to={repo.htmlUrl} key={repo.id} className={styles.wrapper}>
+                        <ul className={styles.repo}>
+                            {repo.name} ({repo.stargazersCount} stars)
+                        </ul>
+                    </OutsideLink>
+                ))}
+        </section>
     );
 };

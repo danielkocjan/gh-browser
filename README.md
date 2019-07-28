@@ -1,3 +1,18 @@
+# gh-browser
+
+### TODO:
+
+-   unit tests
+-   img loading placeholders
+-   error handling, notifications
+-   refactor dispatchers to effects
+-   getUsers pagination
+-   improve a11y, html semantics
+-   split bigger components
+-   split reducer, actions
+
+#
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

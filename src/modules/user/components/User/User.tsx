@@ -1,9 +1,10 @@
 import React, { useReducer, useEffect } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
+import { Spinner } from 'common/components/Spinner/Spinner';
 import { UserDetails } from 'modules/user/components/UserDetails/UserDetails';
-import { userReducer, userInitialState } from 'modules/user/userReducer';
-import { getUserDetailsDispatch } from 'modules/user/userDispatchers';
+import { userReducer, userInitialState } from 'modules/user/reducers/userReducer';
+import { getUserDetailsDispatch } from 'modules/user/dispatchers/userDispatchers';
 
 import styles from './user.module.scss';
 
@@ -24,13 +25,13 @@ const UserContainer: React.FC<RouteProps> = ({
     }, [login]);
 
     return isFetchingUserDetails ? (
-        <div>Loading...</div>
+        <Spinner />
     ) : userDetails && userDetails.login ? (
         <section className={styles.user}>
             <UserDetails user={userDetails} />
         </section>
     ) : (
-        <div>No user with login {login} found</div>
+        <h1>No user with login {login} found</h1>
     );
 };
 

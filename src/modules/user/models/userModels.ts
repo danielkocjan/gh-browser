@@ -23,7 +23,6 @@ export interface UserDetailsData extends UserData {
 export interface UserRepoData {
     id: number;
     name: string;
-    owner: UserData;
     htmlUrl: string;
     stargazersCount: number;
 }

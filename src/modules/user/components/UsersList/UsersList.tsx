@@ -11,12 +11,14 @@ interface UsersListProps {
 
 export const UsersList: React.FC<UsersListProps> = ({ users }) => (
     <ul>
-        {users &&
-            users.length > 0 &&
+        {users && users.length > 0 ? (
             users.map(user => (
                 <Link to={`${AppRoute.Users}/${user.login}`} key={user.id}>
                     <UserCard user={user} />
                 </Link>
-            ))}
+            ))
+        ) : (
+            <h1>No users found</h1>
+        )}
     </ul>
 );

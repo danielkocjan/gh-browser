@@ -1,9 +1,9 @@
 import { Reducer } from 'react';
 
-import { AppAction } from 'common/store';
+import { AppAction } from 'common/appAction';
 
-import { UserData, UserDetailsData, UserRepoData } from './models/userModels';
-import * as actions from './userActions';
+import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
+import * as actions from 'modules/user/actions/userActions';
 
 export interface UserState {
     users: UserData[];

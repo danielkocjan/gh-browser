@@ -1,6 +1,9 @@
-import { UserData } from './userModels';
-
-export interface SearchUsersResponse {
+export interface SearchResponse<T> {
     totalCount: number;
-    items: UserData[];
+    items: T;
+}
+
+export enum SearchResource {
+    Repos = 'repositories',
+    Users = 'users',
 }

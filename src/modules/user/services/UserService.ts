@@ -1,8 +1,8 @@
 import { HttpService } from 'common/services/HttpService';
 import { API_URL, pagination, reposCount } from 'common/config/constants';
 
-import { UserData, UserDetailsData, UserRepoData } from './models/userModels';
-import { SearchUsersResponse } from './models/userRequestModels';
+import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
+import { SearchResponse, SearchResource } from 'modules/user/models/userRequestModels';
 
 export class UserService {
     constructor(private readonly httpService: HttpService) {}
@@ -18,14 +18,21 @@ export class UserService {
     public searchUsers(searchTerm?: string) {
         const searchParam = searchTerm ? `&q=${searchTerm}` : '';
 
-        return this.httpService.get<SearchUsersResponse>(
+        return this.httpService.get<SearchResponse<UserData[]>>(
             `${API_URL}/search/users?per_page=${pagination.size}${searchParam}`
         );
     }
 
     public getUserRepos(login: string) {
-        return this.httpService.get<UserRepoData[]>(
-            `${API_URL}/users/${login}/repos?per_page=${reposCount}`
-        );
+        const url = `${API_URL}/search/repositories?q=user:${login}&per_page=${reposCount}&sort=stars&order=desc`;
+
+        return this.httpService.get<SearchResponse<UserRepoData[]>>(url);
+    }
+
+    // todo: finish url serialization method
+    private searchUrl(resource: SearchResource, params: Record<string, string>) {
+        const query = Object.entries(params);
+
+        return `${API_URL}/search/${resource}/${query}`;
     }
 }
