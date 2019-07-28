@@ -1,4 +1,4 @@
-import camelCaseKeys from 'camelcase-keys';
+import { camelCaseKeys } from 'common/helpers/camelCaseKeys';
 
 export class HttpService {
     public get<R>(url: string) {
@@ -8,7 +8,6 @@ export class HttpService {
     private async makeRequest<R>(url: string, options?: RequestInit): Promise<R> {
         return fetch(url, options)
             .then(res => res.json())
-            .then(res => (camelCaseKeys(res) as unknown) as R);
-        // todo: use another lib or own solution for camelCasing response
+            .then(res => camelCaseKeys<R>(res));
     }
 }

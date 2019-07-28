@@ -1,4 +1,4 @@
-import { AppState } from 'common/store/appReducer';
+import { AppState } from 'common/store';
 
 export const getUsers = ({ user }: AppState) => user.users;
 

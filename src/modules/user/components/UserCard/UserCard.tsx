@@ -1,15 +1,16 @@
 import React from 'react';
 
+import { UserData } from 'modules/user/models/userModels';
+import { UserHeader } from 'modules/user/components/UserHeader/UserHeader';
+
 import styles from './userCard.module.scss';
-import { UserData } from '../../models/userModels';
-import { UserHeader } from '../UserHeader/UserHeader';
 
 interface UserCardProps {
     user: UserData;
 }
 
 export const UserCard: React.FC<UserCardProps> = ({ user }) => (
-    <article className={styles.card}>
+    <li className={styles.card}>
         <UserHeader login={user.login} avatarUrl={user.avatarUrl} />
-    </article>
+    </li>
 );

@@ -10,13 +10,7 @@ ul {
     list-style: none;
 }
 
-a {
-    color: inherit;
-    text-decoration: inherit;
-
-    @include basic-transition(color);
-
-    &:hover {
-        color: $secondary;
-    }
+input,
+button {
+    border: none;
 }

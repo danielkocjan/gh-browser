@@ -1,7 +1,9 @@
 @import '../../../../common/styles/variables';
 
 .userDetails {
+    background: $background-transparent;
     border: 1px solid $border;
+    border-radius: 1rem;
     max-width: 100%;
     padding: 1rem;
     margin: 1rem 0;

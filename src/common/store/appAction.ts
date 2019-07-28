@@ -3,12 +3,12 @@ import { Dispatch } from 'react';
 import { UserAction } from 'modules/user/userActions';
 import { AppState } from './appReducer';
 
-export type AppEffect = (dispatch: Dispatch<AppAction>, state: AppState) => void;
+type AugmentedDispatch = (dispatch: Dispatch<AppAction>, state: AppState) => void;
 
-export type AppDispatch = Dispatch<AppEffect | AppAction>;
+export type AppDispatch = Dispatch<AugmentedDispatch | AppAction>;
 
 export const appDispatch = (dispatch: Dispatch<AppAction>, state: AppState) => (
-    input: AppEffect | AppAction
+    input: AugmentedDispatch | AppAction
 ) => (input instanceof Function ? input(dispatch, state) : dispatch(input));
 
 export interface Action<T, P = null> {

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
-import { AppState } from 'common/store/appReducer';
-import { withState } from 'common/store/withState';
-import { AppDispatch } from 'common/store/appAction';
+import { AppState, withState, AppDispatch } from 'common/store';
 import { compose } from 'common/helpers/compose';
 
 import { UserDetails } from 'modules/user/components/UserDetails/UserDetails';
 import { UserDetailsData } from 'modules/user/models/userModels';
 import { getUserDetailsByLogin, getUserDetailsFetchingStatus } from 'modules/user/userSelectors';
-import { getUserDetailsEffect } from 'modules/user/userEffects';
+import { getUserDetailsDispatch } from 'modules/user/userDispatchers';
 
 import styles from './user.module.scss';
 
@@ -53,7 +51,7 @@ const mapState = (state: AppState, props: UserContainerProps): StateProps => ({
 });
 
 const mapDispatch = (dispatch: AppDispatch): DispatchProps => ({
-    getUserDetails: login => dispatch(getUserDetailsEffect(login)),
+    getUserDetails: login => dispatch(getUserDetailsDispatch(login)),
 });
 
 export const User = compose(

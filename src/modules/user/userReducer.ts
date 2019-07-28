@@ -1,6 +1,6 @@
 import { Reducer } from 'react';
 
-import { AppAction } from 'common/store/appAction';
+import { AppAction } from 'common/store';
 
 import { UserData, UserDetailsData } from './models/userModels';
 import * as actions from './userActions';
@@ -30,12 +30,14 @@ export const userInitialState: UserState = {
 export const userReducer: Reducer<UserState, AppAction> = (state = userInitialState, action) => {
     switch (action.type) {
         case actions.GET_USERS_REQUESTED:
+        case actions.SEARCH_USERS_REQUESTED:
             return {
                 ...state,
                 isFetchingUsers: true,
             };
 
         case actions.GET_USERS_SUCCEEDED:
+        case actions.SEARCH_USERS_SUCCEEDED:
             return {
                 ...state,
                 users: action.payload!,
@@ -43,9 +45,11 @@ export const userReducer: Reducer<UserState, AppAction> = (state = userInitialSt
             };
 
         case actions.GET_USERS_FAILED:
+        case actions.SEARCH_USERS_FAILED:
             return {
                 ...state,
                 isFetchingUsers: false,
+                users: [],
             };
 
         case actions.GET_USER_DETAILS_REQUESTED:

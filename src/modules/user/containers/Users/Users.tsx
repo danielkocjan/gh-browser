@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-import { withState } from 'common/store/withState';
-import { AppState } from 'common/store/appReducer';
-import { AppRoute } from 'common/config/routes';
+import { withState, AppState, AppDispatch } from 'common/store';
+import { useDebounce } from 'common/hooks/useDebounce';
 
-import { UserCard } from 'modules/user/components/UserCard/UserCard';
 import { UserData } from 'modules/user/models/userModels';
-import { getUsersEffect } from 'modules/user/userEffects';
+import { getUsersDispatch, searchUsersDispatch } from 'modules/user/userDispatchers';
 import { getUsers, getUsersFetchingStatus } from 'modules/user/userSelectors';
+import { UsersList } from 'modules/user/components/UsersList/UsersList';
 
 import styles from './users.module.scss';
-import { AppDispatch } from 'common/store/appAction';
 
 interface StateProps {
     users: UserData[];
@@ -20,32 +17,43 @@ interface StateProps {
 
 interface DispatchProps {
     getUsers: () => void;
+    searchUsers: (searchTerm: string) => void;
 }
 
-class UsersContainer extends Component<StateProps & DispatchProps> {
-    componentDidMount() {
-        this.props.getUsers();
-    }
+const UsersContainer: React.FC<StateProps & DispatchProps> = ({
+    getUsers,
+    searchUsers,
+    isFetching,
+    users,
+}) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearch = useDebounce(searchTerm);
 
-    render() {
-        // todo: spinner hoc
-        return this.props.isFetching ? (
-            'Loading...'
-        ) : (
-            <section className={styles.users}>
-                {this.props.users.map(user => (
-                    <Link
-                        className={styles.userCardWrapper}
-                        to={`${AppRoute.Users}/${user.login}`}
-                        key={user.id}
-                    >
-                        <UserCard user={user} />
-                    </Link>
-                ))}
-            </section>
-        );
-    }
-}
+    useEffect(() => {
+        debouncedSearch ? searchUsers(searchTerm) : getUsers();
+    }, [debouncedSearch]);
+
+    return (
+        <section className={styles.users}>
+            <header>
+                <div className={styles.inputWrapper}>
+                    <input
+                        className={styles.searchInput}
+                        placeholder="Search users"
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.currentTarget.value)}
+                    />
+                    <button className={styles.searchClear} onClick={_ => setSearchTerm('')}>
+                        <span role="img" aria-label="Cross Mark">
+                            ✕
+                        </span>
+                    </button>
+                </div>
+            </header>
+            {isFetching ? 'Loading...' : <UsersList users={users} />}
+        </section>
+    );
+};
 
 const mapState = (state: AppState): StateProps => ({
     users: getUsers(state),
@@ -53,7 +61,8 @@ const mapState = (state: AppState): StateProps => ({
 });
 
 const mapDispatch = (dispatch: AppDispatch): DispatchProps => ({
-    getUsers: () => dispatch(getUsersEffect()),
+    getUsers: () => dispatch(getUsersDispatch()),
+    searchUsers: searchTerm => dispatch(searchUsersDispatch(searchTerm)),
 });
 
 export const Users = withState(mapState, mapDispatch)(UsersContainer);

@@ -8,8 +8,12 @@
     padding: 1rem;
 
     border: 1px solid $border;
+    border-radius: 1rem;
+    background: $background-transparent;
 
-    @include basic-shadow;
+    margin: 2rem 0;
+
+    // @include basic-shadow;
     @include basic-transition(border);
 
     &:hover {
