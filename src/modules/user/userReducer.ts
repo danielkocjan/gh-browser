@@ -2,29 +2,28 @@ import { Reducer } from 'react';
 
 import { AppAction } from 'common/store';
 
-import { UserData, UserDetailsData } from './models/userModels';
+import { UserData, UserDetailsData, UserRepoData } from './models/userModels';
 import * as actions from './userActions';
 
 export interface UserState {
     users: UserData[];
     isFetchingUsers: boolean;
 
-    usersDetails: UserDetailsData[];
+    userDetails?: UserDetailsData;
     isFetchingUserDetails: boolean;
 
-    usersRepositories: Object[];
-    isFetchingUserRepositories: boolean;
+    userRepos: UserRepoData[];
+    isFetchingUserRepos: boolean;
 }
 
 export const userInitialState: UserState = {
     users: [],
     isFetchingUsers: false,
 
-    usersDetails: [],
     isFetchingUserDetails: false,
 
-    usersRepositories: [],
-    isFetchingUserRepositories: false,
+    userRepos: [],
+    isFetchingUserRepos: false,
 };
 
 export const userReducer: Reducer<UserState, AppAction> = (state = userInitialState, action) => {
@@ -49,7 +48,6 @@ export const userReducer: Reducer<UserState, AppAction> = (state = userInitialSt
             return {
                 ...state,
                 isFetchingUsers: false,
-                users: [],
             };
 
         case actions.GET_USER_DETAILS_REQUESTED:
@@ -61,7 +59,7 @@ export const userReducer: Reducer<UserState, AppAction> = (state = userInitialSt
         case actions.GET_USER_DETAILS_SUCCEEDED:
             return {
                 ...state,
-                usersDetails: [...state.usersDetails, action.payload!],
+                userDetails: action.payload!,
                 isFetchingUserDetails: false,
             };
 
@@ -69,6 +67,25 @@ export const userReducer: Reducer<UserState, AppAction> = (state = userInitialSt
             return {
                 ...state,
                 isFetchingUserDetails: false,
+            };
+
+        case actions.GET_USER_REPOS_REQUESTED:
+            return {
+                ...state,
+                isFetchingUserRepos: true,
+            };
+
+        case actions.GET_USER_REPOS_SUCCEEDED:
+            return {
+                ...state,
+                isFetchingUserRepos: false,
+                userRepos: action.payload!,
+            };
+
+        case actions.GET_USER_REPOS_FAILED:
+            return {
+                ...state,
+                isFetchingUserRepos: false,
             };
 
         default:
