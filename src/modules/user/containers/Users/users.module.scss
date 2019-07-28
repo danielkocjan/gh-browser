@@ -1,7 +1,28 @@
+@import '../../../../common/styles/variables';
+
 .users {
     display: flex;
     flex-direction: column;
 
     width: 100%;
     max-width: 60rem;
+}
+
+.inputWrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.searchInput {
+    padding: 1rem;
+    width: 100%;
+    max-width: 20rem;
+    position: relative;
+    background: $background-transparent;
+}
+
+.searchClear {
+    margin-left: 0.25rem;
+    padding: 1rem 0.75rem;
 }

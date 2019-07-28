@@ -2,7 +2,43 @@
 @import './reset';
 @import './typography';
 
+html {
+    background: $background-primary;
+}
+
 body {
     color: $main-font-color;
-    background-color: $background;
+    background: linear-gradient($background-primary, $background-secondary);
+
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+
+    @include basic-transition(color);
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
+input {
+    background: $dark-primary;
+    color: $main-font-color;
+    border: 1px solid $border;
+    border-radius: 0.5rem;
+}
+
+input::placeholder {
+    color: $border;
+}
+
+button {
+    border-radius: 0.5rem;
+    background: $primary;
+    color: $main-font-color;
+    cursor: pointer;
+    border: 1px solid $border;
 }
