@@ -29,7 +29,7 @@ type UserContainerProps = StateProps & DispatchProps & RouteProps;
 
 export class UserContainer extends Component<UserContainerProps> {
     componentDidMount() {
-        !this.props.userDetails && this.props.getUserDetails(this.props.userLogin);
+        this.props.getUserDetails(this.props.userLogin);
     }
 
     render() {
