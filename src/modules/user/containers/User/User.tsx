@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
-import { AppState } from 'common/store/appReducer';
-import { withState } from 'common/store/withState';
-import { AppDispatch } from 'common/store/appAction';
+import { AppState, withState, AppDispatch } from 'common/store';
 import { compose } from 'common/helpers/compose';
 
 import { UserDetails } from 'modules/user/components/UserDetails/UserDetails';

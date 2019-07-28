@@ -1,4 +1,4 @@
-import { Action } from 'common/store/appAction';
+import { Action } from 'common/store';
 import { UserData, UserDetailsData } from './models/userModels';
 
 export const GET_USERS_REQUESTED = '[USER] GET_USERS_REQUESTED';
@@ -18,6 +18,26 @@ export const GET_USERS_FAILED = '[USER] GET_USERS_FAILED';
 export type GetUsersFailure = Action<typeof GET_USERS_FAILED, string>;
 export const getUsersFailure = (error: string): GetUsersFailure => ({
     type: GET_USERS_FAILED,
+    payload: error,
+});
+
+export const SEARCH_USERS_REQUESTED = '[USER] SEARCH_USERS_REQUESTED';
+export type SearchUsersRequest = Action<typeof SEARCH_USERS_REQUESTED>;
+export const searchUsersRequest = (): SearchUsersRequest => ({
+    type: SEARCH_USERS_REQUESTED,
+});
+
+export const SEARCH_USERS_SUCCEEDED = '[USER] SEARCH_USERS_SUCCEEDED';
+export type SearchUsersSuccess = Action<typeof SEARCH_USERS_SUCCEEDED, UserData[]>;
+export const searchUsersSuccess = (users: UserData[]): SearchUsersSuccess => ({
+    type: SEARCH_USERS_SUCCEEDED,
+    payload: users,
+});
+
+export const SEARCH_USERS_FAILED = '[USER] SEARCH_USERS_FAILED';
+export type SearchUsersFailure = Action<typeof SEARCH_USERS_FAILED, string>;
+export const searchUsersFailure = (error: string): SearchUsersFailure => ({
+    type: SEARCH_USERS_FAILED,
     payload: error,
 });
 
@@ -45,6 +65,9 @@ export type UserAction =
     | GetUsersRequest
     | GetUsersSuccess
     | GetUsersFailure
+    | SearchUsersRequest
+    | SearchUsersSuccess
+    | SearchUsersFailure
     | GetUserDetailsRequest
     | GetUserDetailsSuccess
     | GetUserDetailsFailure;

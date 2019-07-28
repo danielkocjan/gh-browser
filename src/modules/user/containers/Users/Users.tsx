@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-import { withState } from 'common/store/withState';
-import { AppState } from 'common/store/appReducer';
-import { AppRoute } from 'common/config/routes';
+import { withState, AppState, AppDispatch } from 'common/store';
 
-import { UserCard } from 'modules/user/components/UserCard/UserCard';
 import { UserData } from 'modules/user/models/userModels';
-import { getUsersEffect } from 'modules/user/userEffects';
+import { getUsersEffect, searchUsersEffect } from 'modules/user/userEffects';
 import { getUsers, getUsersFetchingStatus } from 'modules/user/userSelectors';
+import { UsersList } from 'modules/user/components/UsersList/UsersList';
 
 import styles from './users.module.scss';
-import { AppDispatch } from 'common/store/appAction';
 
 interface StateProps {
     users: UserData[];
@@ -20,6 +16,7 @@ interface StateProps {
 
 interface DispatchProps {
     getUsers: () => void;
+    searchUsers: (searchTerm: string) => void;
 }
 
 class UsersContainer extends Component<StateProps & DispatchProps> {
@@ -27,21 +24,17 @@ class UsersContainer extends Component<StateProps & DispatchProps> {
         this.props.getUsers();
     }
 
+    onSearchChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const searchTerm = e.currentTarget.value;
+
+        return searchTerm ? this.props.searchUsers(searchTerm) : this.props.getUsers();
+    };
+
     render() {
-        // todo: spinner hoc
-        return this.props.isFetching ? (
-            'Loading...'
-        ) : (
+        return (
             <section className={styles.users}>
-                {this.props.users.map(user => (
-                    <Link
-                        className={styles.userCardWrapper}
-                        to={`${AppRoute.Users}/${user.login}`}
-                        key={user.id}
-                    >
-                        <UserCard user={user} />
-                    </Link>
-                ))}
+                <input placeholder="Search users..." onChange={this.onSearchChange} />
+                <UsersList isFetching={this.props.isFetching} users={this.props.users} />
             </section>
         );
     }
@@ -54,6 +47,7 @@ const mapState = (state: AppState): StateProps => ({
 
 const mapDispatch = (dispatch: AppDispatch): DispatchProps => ({
     getUsers: () => dispatch(getUsersEffect()),
+    searchUsers: searchTerm => dispatch(searchUsersEffect(searchTerm)),
 });
 
 export const Users = withState(mapState, mapDispatch)(UsersContainer);
