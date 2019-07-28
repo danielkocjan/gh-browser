@@ -1,5 +1,5 @@
 import { Action } from 'common/store';
-import { UserData, UserDetailsData } from 'modules/user/models/userModels';
+import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
 
 export const GET_USERS_REQUESTED = '[USER] GET_USERS_REQUESTED';
 export type GetUsersRequest = Action<typeof GET_USERS_REQUESTED>;
@@ -61,6 +61,26 @@ export const getUserDetailsFailure = (error: string): GetUserDetailsFailure => (
     payload: error,
 });
 
+export const GET_USER_REPOS_REQUESTED = '[USER] GET_USER_REPOS_REQUESTED';
+export type GetUserReposRequest = Action<typeof GET_USER_REPOS_REQUESTED>;
+export const getUserReposRequest = (): GetUserReposRequest => ({
+    type: GET_USER_REPOS_REQUESTED,
+});
+
+export const GET_USER_REPOS_SUCCEEDED = '[USER] GET_USER_REPOS_SUCCEEDED';
+export type GetUserReposSuccess = Action<typeof GET_USER_REPOS_SUCCEEDED, UserRepoData[]>;
+export const getUserReposSuccess = (repos: UserRepoData[]): GetUserReposSuccess => ({
+    type: GET_USER_REPOS_SUCCEEDED,
+    payload: repos,
+});
+
+export const GET_USER_REPOS_FAILED = '[USER] GET_USER_REPOS_FAILED';
+export type GetUserReposFailure = Action<typeof GET_USER_REPOS_FAILED, string>;
+export const getUserReposFailure = (error: string): GetUserReposFailure => ({
+    type: GET_USER_REPOS_FAILED,
+    payload: error,
+});
+
 export type UserAction =
     | GetUsersRequest
     | GetUsersSuccess
@@ -70,4 +90,7 @@ export type UserAction =
     | SearchUsersFailure
     | GetUserDetailsRequest
     | GetUserDetailsSuccess
-    | GetUserDetailsFailure;
+    | GetUserDetailsFailure
+    | GetUserReposRequest
+    | GetUserReposSuccess
+    | GetUserReposFailure;

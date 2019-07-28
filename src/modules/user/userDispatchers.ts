@@ -2,14 +2,12 @@ import { Dispatch } from 'react';
 
 import { rootService } from 'common/services/rootService';
 
-import { UserData, UserDetailsData } from './models/userModels';
+import { UserData, UserDetailsData, UserRepoData } from './models/userModels';
 import { SearchUsersResponse } from './models/userRequestModels';
 import { UserAction } from './userActions';
 import * as actions from './userActions';
 
-// todo: refactor this to hooks
-
-export const getUsersDispatch = () => (dispatch: Dispatch<UserAction>) => {
+export const getUsersDispatch = (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUsersRequest());
 
     return rootService.userService
@@ -18,7 +16,7 @@ export const getUsersDispatch = () => (dispatch: Dispatch<UserAction>) => {
         .catch(() => dispatch(actions.getUsersFailure('Failed to get users')));
 };
 
-export const searchUsersDispatch = (searchTerm: string) => (dispatch: Dispatch<UserAction>) => {
+export const searchUsersDispatch = (dispatch: Dispatch<UserAction>, searchTerm: string) => {
     dispatch(actions.searchUsersRequest());
 
     return rootService.userService
@@ -27,11 +25,20 @@ export const searchUsersDispatch = (searchTerm: string) => (dispatch: Dispatch<U
         .catch(() => dispatch(actions.searchUsersFailure('Failed to search users')));
 };
 
-export const getUserDetailsDispatch = (login: string) => (dispatch: Dispatch<UserAction>) => {
+export const getUserDetailsDispatch = (dispatch: Dispatch<UserAction>, login: string) => {
     dispatch(actions.getUserDetailsRequest());
 
     return rootService.userService
         .getUserDetails(login)
         .then((user: UserDetailsData) => dispatch(actions.getUserDetailsSuccess(user)))
         .catch(() => dispatch(actions.getUserDetailsFailure('Failed to get user details')));
+};
+
+export const getUserReposDispatch = (dispatch: Dispatch<UserAction>, login: string) => {
+    dispatch(actions.getUserReposRequest());
+
+    return rootService.userService
+        .getUserRepos(login)
+        .then((repos: UserRepoData[]) => dispatch(actions.getUserReposSuccess(repos)))
+        .catch(() => dispatch(actions.getUserReposFailure('Failed to get user repositories')));
 };

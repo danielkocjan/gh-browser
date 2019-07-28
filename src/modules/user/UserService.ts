@@ -1,7 +1,7 @@
 import { HttpService } from 'common/services/HttpService';
-import { API_URL, pagination } from 'common/config/constants';
+import { API_URL, pagination, reposCount } from 'common/config/constants';
 
-import { UserData, UserDetailsData } from './models/userModels';
+import { UserData, UserDetailsData, UserRepoData } from './models/userModels';
 import { SearchUsersResponse } from './models/userRequestModels';
 
 export class UserService {
@@ -20,6 +20,12 @@ export class UserService {
 
         return this.httpService.get<SearchUsersResponse>(
             `${API_URL}/search/users?per_page=${pagination.size}${searchParam}`
+        );
+    }
+
+    public getUserRepos(login: string) {
+        return this.httpService.get<UserRepoData[]>(
+            `${API_URL}/users/${login}/repos?per_page=${reposCount}`
         );
     }
 }
