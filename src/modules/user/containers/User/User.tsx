@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import { AppState } from 'common/store/appReducer';
-import { connect } from 'common/store/connect';
+import { withState } from 'common/store/withState';
+import { AppDispatch } from 'common/store/appAction';
 import { compose } from 'common/helpers/compose';
 
-import styles from './user.module.scss';
 import { UserDetails } from 'modules/user/components/UserDetails/UserDetails';
 import { UserDetailsData } from 'modules/user/models/userModels';
 import { getUserDetailsByLogin, getUserDetailsFetchingStatus } from 'modules/user/userSelectors';
-import { getUserDetails } from 'modules/user/userEffects';
+import { getUserDetailsEffect } from 'modules/user/userEffects';
+
+import styles from './user.module.scss';
 
 interface StateProps {
     userLogin: string;
@@ -18,14 +20,14 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    getUserDetails: typeof getUserDetails;
+    getUserDetails: (login: string) => void;
 }
 
 type RouteProps = RouteComponentProps<{ login: string }>;
 
-type UserProps = StateProps & DispatchProps & RouteProps;
+type UserContainerProps = StateProps & DispatchProps & RouteProps;
 
-export class UserContainer extends Component<UserProps> {
+export class UserContainer extends Component<UserContainerProps> {
     componentDidMount() {
         !this.props.userDetails && this.props.getUserDetails(this.props.userLogin);
     }
@@ -44,20 +46,17 @@ export class UserContainer extends Component<UserProps> {
     }
 }
 
-const mapState = (state: AppState, props: UserProps): StateProps => ({
+const mapState = (state: AppState, props: UserContainerProps): StateProps => ({
     userLogin: props.match.params.login,
     userDetails: getUserDetailsByLogin(state, props.match.params.login),
     isFetching: getUserDetailsFetchingStatus(state),
 });
 
-const mapDispatch = (dispatch: React.Dispatch<any>) => ({
-    getUserDetails: (login: string) => dispatch(getUserDetails(login)),
+const mapDispatch = (dispatch: AppDispatch): DispatchProps => ({
+    getUserDetails: login => dispatch(getUserDetailsEffect(login)),
 });
 
 export const User = compose(
     withRouter,
-    connect(
-        mapState,
-        mapDispatch
-    )
+    withState(mapState, mapDispatch)
 )(UserContainer);

@@ -1,9 +1,8 @@
 import React, { useContext, ReducerState, Reducer, useReducer } from 'react';
 
 import { AppReducer } from './appReducer';
-import { GlobalState } from './store';
-import { AppAction } from './appAction';
-import { appDispatch } from './dispatch';
+import { GlobalState } from './appContext';
+import { AppAction, appDispatch } from './appAction';
 
 interface StateProviderProps {
     reducer: Reducer<ReturnType<AppReducer>, AppAction>;

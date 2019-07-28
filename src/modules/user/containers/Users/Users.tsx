@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'common/store/connect';
+import { withState } from 'common/store/withState';
 import { AppState } from 'common/store/appReducer';
 import { AppRoute } from 'common/config/routes';
 
-import styles from './users.module.scss';
-import { UserCard } from '../../components/UserCard/UserCard';
-
+import { UserCard } from 'modules/user/components/UserCard/UserCard';
 import { UserData } from 'modules/user/models/userModels';
-import { getUsers } from 'modules/user/userEffects';
-import { getUsers as getUsersSelector, getUsersFetchingStatus } from 'modules/user/userSelectors';
+import { getUsersEffect } from 'modules/user/userEffects';
+import { getUsers, getUsersFetchingStatus } from 'modules/user/userSelectors';
+
+import styles from './users.module.scss';
+import { AppDispatch } from 'common/store/appAction';
 
 interface StateProps {
     users: UserData[];
@@ -18,7 +19,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    getUsers: any;
+    getUsers: () => void;
 }
 
 class UsersContainer extends Component<StateProps & DispatchProps> {
@@ -47,15 +48,12 @@ class UsersContainer extends Component<StateProps & DispatchProps> {
 }
 
 const mapState = (state: AppState): StateProps => ({
-    users: getUsersSelector(state),
+    users: getUsers(state),
     isFetching: getUsersFetchingStatus(state),
 });
 
-const mapDispatch = (dispatch: React.Dispatch<any>) => ({
-    getUsers: () => dispatch(getUsers()),
+const mapDispatch = (dispatch: AppDispatch): DispatchProps => ({
+    getUsers: () => dispatch(getUsersEffect()),
 });
 
-export const Users = connect(
-    mapState,
-    mapDispatch
-)(UsersContainer);
+export const Users = withState(mapState, mapDispatch)(UsersContainer);

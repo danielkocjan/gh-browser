@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+
 import { pagination, API_URL } from 'common/config/constants';
 
 import { UserData, UserDetailsData } from './models/userModels';
@@ -7,7 +9,7 @@ import * as actions from './userActions';
 // todo: usersEffectFactory
 // todo: httpService with camelCased response, usersService
 
-export const getUsers = () => (dispatch: React.Dispatch<UserAction>) => {
+export const getUsersEffect = () => (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUsersRequest());
 
     return fetch(`${API_URL}/users?per_page=${pagination.size}`)
@@ -16,7 +18,7 @@ export const getUsers = () => (dispatch: React.Dispatch<UserAction>) => {
         .catch(() => dispatch(actions.getUsersFailure('Failed to fetch users')));
 };
 
-export const getUserDetails = (login: string) => (dispatch: React.Dispatch<UserAction>) => {
+export const getUserDetailsEffect = (login: string) => (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUserDetailsRequest());
 
     return fetch(`${API_URL}/users/${login}`)

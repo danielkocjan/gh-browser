@@ -1,14 +1,13 @@
 import { createContext } from 'react';
 
 import { AppState, appInitialState } from './appReducer';
-import { AppAction } from './appAction';
+import { AppDispatch } from './appAction';
 
 export interface Context {
     state: AppState;
-    dispatch: React.Dispatch<AppAction>;
+    dispatch?: AppDispatch;
 }
 
 export const GlobalState = createContext<Context>({
     state: appInitialState,
-    dispatch: () => {},
 });
