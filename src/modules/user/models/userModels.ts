@@ -19,3 +19,11 @@ export interface UserDetailsData extends UserData {
     location?: string;
     bio?: string;
 }
+
+export interface UserRepoData {
+    id: number;
+    name: string;
+    owner: UserData;
+    htmlUrl: string;
+    stargazersCount: number;
+}

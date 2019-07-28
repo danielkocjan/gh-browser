@@ -34,11 +34,11 @@ export const getUserDetailsDispatch = (dispatch: Dispatch<UserAction>, login: st
         .catch(() => dispatch(actions.getUserDetailsFailure('Failed to get user details')));
 };
 
-export const getUserReposDispatch = (login: string) => (dispatch: Dispatch<UserAction>) => {
-    dispatch(actions.getUserDetailsRequest());
+export const getUserReposDispatch = (dispatch: Dispatch<UserAction>, login: string) => {
+    dispatch(actions.getUserReposRequest());
 
     return rootService.userService
         .getUserRepos(login)
         .then((repos: UserRepoData[]) => dispatch(actions.getUserReposSuccess(repos)))
-        .catch(() => dispatch(actions.getUserDetailsFailure('Failed to get user repositories')));
+        .catch(() => dispatch(actions.getUserReposFailure('Failed to get user repositories')));
 };
