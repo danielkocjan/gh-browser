@@ -15,18 +15,17 @@ export class UserService {
         return this.httpService.get<UserDetailsData>(`${API_URL}/users/${login}`);
     }
 
-    public searchUsers(searchTerm?: string) {
-        const searchParam = searchTerm ? `&q=${searchTerm}` : '';
-
+    public searchUsers(searchTerm: string) {
         return this.httpService.get<SearchResponse<UserData[]>>(
-            `${API_URL}/search/users?per_page=${pagination.size}${searchParam}`
+            `${API_URL}/search/users?per_page=${pagination.size}&q=${searchTerm}`
         );
     }
 
     public getUserRepos(login: string) {
-        const url = `${API_URL}/search/repositories?q=user:${login}&per_page=${reposCount}&sort=stars&order=desc`;
+        const url = `${API_URL}/search/repositories`;
+        const query = `?q=user:${login}&per_page=${reposCount}&sort=stars&order=desc`;
 
-        return this.httpService.get<SearchResponse<UserRepoData[]>>(url);
+        return this.httpService.get<SearchResponse<UserRepoData[]>>(`${url}${query}`);
     }
 
     // todo: finish url serialization method

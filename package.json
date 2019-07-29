@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "camelcase-keys": "^6.0.0",
         "lodash": "^4.17.15",
         "normalize.css": "^8.0.1",
         "react": "^16.8.6",
