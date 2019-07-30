@@ -4,17 +4,20 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { AppRoute } from 'common/config/routes';
 import styles from './app.module.scss';
 
-import { Users } from 'modules/user/components/Users/Users';
-import { User } from 'modules/user/components/User/User';
+import { UserProvider } from 'user/userContext';
+import { Users } from 'user/components/Users/Users';
+import { User } from 'user/components/User/User';
 
 export const App: React.FC = () => (
     <Router>
-        <main className={styles.appView}>
-            <Switch>
-                <Route path={AppRoute.Users} exact component={Users} />
-                <Route path={`${AppRoute.Users}/:login`} component={User} />
-                <Redirect to={AppRoute.Users} />
-            </Switch>
-        </main>
+        <UserProvider>
+            <main className={styles.appView}>
+                <Switch>
+                    <Route path={AppRoute.Users} exact component={Users} />
+                    <Route path={`${AppRoute.Users}/:login`} component={User} />
+                    <Redirect to={AppRoute.Users} />
+                </Switch>
+            </main>
+        </UserProvider>
     </Router>
 );

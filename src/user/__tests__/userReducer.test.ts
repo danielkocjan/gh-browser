@@ -1,7 +1,7 @@
-import * as actions from 'modules/user/actions/userActions';
-import { userInitialState, userReducer } from 'modules/user/reducers/userReducer';
-import { usersMocks } from 'modules/user/__mocks__/usersMocks';
-import { userDetailsMock } from 'modules/user/__mocks__/userDetailsMocks';
+import * as actions from 'user/actions/userActions';
+import { userInitialState, userReducer } from 'user/reducers/userReducer';
+import { usersMocks } from 'user/__mocks__/usersMocks';
+import { userDetailsMock } from 'user/__mocks__/userDetailsMocks';
 
 describe('user reducer', () => {
     it('should handle getUsersSuccess', () => {

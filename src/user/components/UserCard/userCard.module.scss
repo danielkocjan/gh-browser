@@ -1,7 +1,7 @@
 // to prevent those imports in every scss module file,
 // scss files that do not produce styles (variables/mixins) could be injected in webpack config
-@import '../../../../common/styles/variables';
-@import '../../../../common/styles/mixins';
+@import '../../../common/styles/variables';
+@import '../../../common/styles/mixins';
 
 .card {
     max-width: 100%;

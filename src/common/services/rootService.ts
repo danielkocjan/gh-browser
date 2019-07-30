@@ -1,6 +1,6 @@
 import { HttpService } from './HttpService';
 
-import { UserService } from 'modules/user/services/UserService';
+import { UserService } from 'user/services/UserService';
 
 const httpService = new HttpService();
 const userService = new UserService(httpService);

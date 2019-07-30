@@ -2,10 +2,10 @@ import { Dispatch } from 'react';
 
 import { rootService } from 'common/services/rootService';
 
-import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
-import { SearchResponse } from 'modules/user/models/userRequestModels';
-import { UserAction } from 'modules/user/actions/userActions';
-import * as actions from 'modules/user/actions//userActions';
+import { UserData, UserDetailsData, UserRepoData } from 'user/models/userModels';
+import { SearchResponse } from 'user/models/userRequestModels';
+import { UserAction } from 'user/actions/userActions';
+import * as actions from 'user/actions//userActions';
 
 export const getUsersDispatch = (dispatch: Dispatch<UserAction>) => {
     dispatch(actions.getUsersRequest());

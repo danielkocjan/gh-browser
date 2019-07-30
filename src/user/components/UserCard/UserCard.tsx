@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { UserData } from 'modules/user/models/userModels';
-import { UserHeader } from 'modules/user/components/UserHeader/UserHeader';
+import { UserData } from 'user/models/userModels';
+import { UserHeader } from 'user/components/UserHeader/UserHeader';
 
 import styles from './userCard.module.scss';
 

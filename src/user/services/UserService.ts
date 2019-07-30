@@ -1,8 +1,8 @@
 import { HttpService } from 'common/services/HttpService';
 import { API_URL, pagination, reposCount } from 'common/config/constants';
 
-import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
-import { SearchResponse, SearchResource } from 'modules/user/models/userRequestModels';
+import { UserData, UserDetailsData, UserRepoData } from 'user/models/userModels';
+import { SearchResponse, SearchResource } from 'user/models/userRequestModels';
 
 export class UserService {
     constructor(private readonly httpService: HttpService) {}

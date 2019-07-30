@@ -1,4 +1,4 @@
-import { UserAction } from 'modules/user/actions/userActions';
+import { UserAction } from 'user/actions/userActions';
 
 export interface Action<T, P = null> {
     readonly type: T;

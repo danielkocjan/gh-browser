@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppRoute } from 'common/config/routes';
-import { UserData } from 'modules/user/models/userModels';
-import { UserCard } from 'modules/user/components/UserCard/UserCard';
+import { UserData } from 'user/models/userModels';
+import { UserCard } from 'user/components/UserCard/UserCard';
 
 interface UsersListProps {
     users: UserData[];

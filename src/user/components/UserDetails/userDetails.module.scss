@@ -1,4 +1,4 @@
-@import '../../../../common/styles/variables';
+@import '../../../common/styles/variables';
 
 .userDetails {
     background: $background-transparent;
@@ -9,15 +9,15 @@
     margin: 1rem 0;
 }
 
-.additionalInfo {
+.info {
     padding: 2rem 0;
     max-width: 100%;
+}
 
-    &Row {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-    }
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
 }
 
 .content {

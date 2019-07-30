@@ -2,8 +2,8 @@ import { Reducer } from 'react';
 
 import { AppAction } from 'common/appAction';
 
-import { UserData, UserDetailsData, UserRepoData } from 'modules/user/models/userModels';
-import * as actions from 'modules/user/actions/userActions';
+import { UserData, UserDetailsData, UserRepoData } from 'user/models/userModels';
+import * as actions from 'user/actions/userActions';
 
 export interface UserState {
     users: UserData[];
@@ -26,7 +26,9 @@ export const userInitialState: UserState = {
     isFetchingUserRepos: false,
 };
 
-export const userReducer: Reducer<UserState, AppAction> = (state = userInitialState, action) => {
+export type UserReducer = Reducer<UserState, AppAction>;
+
+export const userReducer: UserReducer = (state = userInitialState, action) => {
     switch (action.type) {
         case actions.GET_USERS_REQUESTED:
         case actions.SEARCH_USERS_REQUESTED:
